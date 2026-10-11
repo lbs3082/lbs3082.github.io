@@ -1,6 +1,6 @@
 # 이범수 — AI Engineer
 
-데이터 분석과 개발 경험을 소개하는 포트폴리오입니다.
+데이터 분석과 개발 경험의 문제 발견, 판단, 실행을 소개하는 Case Study 포트폴리오입니다. 각 상세 페이지는 Problem → Insight → Strategy → Execution → Result 순서로 구성합니다.
 
 **사이트:** https://lbs3082.github.io/
 
@@ -10,8 +10,9 @@
 - `stories.js`: RAG, RM 대시보드, 학생회, 실습 조교 사례
 - `projects.js`: 기존 프로젝트와 사이드 프로젝트
 - `github.js`: GitHub 개발 작업
-- `app.js`: 프로젝트 목록·상세 페이지와 이미지 확대
-- `styles.css`, `editorial.css`: 레이아웃과 반응형 디자인
+- `cases.js`: 사례별 핵심 질문, 인사이트, 전략, 실행 단계
+- `narrative.js`: 사례 목록·5단계 상세 페이지, 스크롤 목차, 이미지 확대
+- `case-study.css`: 편집 디자인과 PC·모바일 레이아웃
 - `assets/`: 웹사이트에서 사용하는 이미지
 
 ## 배포
