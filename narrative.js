@@ -30,10 +30,9 @@ if(content){
     const c=caseStories[p.id];
     const scope=p.scope==='side'?'SIDE PROJECT':p.scope==='experience'?'EXPERIENCE':'PROJECT';
     const sequence=p.scope==='side'?sideProjects:p.scope==='experience'?experienceStories:p.scope==='additional'||p.scope==='github'?[additionalDevelopment,githubWork]:selectedProjects;
-    const next=sequence[(sequence.indexOf(p)+1)%sequence.length];
-    const isFeaturedSequence=sequence===selectedProjects||sequence===experienceStories;
-    const returnsHome=isFeaturedSequence&&p===sequence[sequence.length-1];
-    const offersHomeChoice=isFeaturedSequence&&!returnsHome;
+    const next=sequence[sequence.indexOf(p)+1];
+    const returnsHome=!next;
+    const offersHomeChoice=!returnsHome;
     const nextHref=returnsHome?'index.html':projectURL(next);
     const nextLabel=returnsHome?'BACK TO HOME':`NEXT CASE / ${caseStories[next.id].number}`;
     const nextHeading=returnsHome?'메인으로\n돌아가기':caseStories[next.id].headline;
