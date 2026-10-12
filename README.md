@@ -7,9 +7,8 @@
 ## 수정 위치
 
 - `index.html`: 소개, 학력·경험, 연락처
-- `stories.js`: RAG, RM 대시보드, 학생회, 실습 조교 사례
-- `projects.js`: 기존 프로젝트와 사이드 프로젝트
-- `github.js`: GitHub 개발 작업
+- `stories.js`: 학생회·실습 조교 사례와 홈 페이지의 사례 구성
+- `projects.js`: RM 대시보드·스마트 침대·양성과정 사이드 프로젝트
 - `cases.js`: 사례별 핵심 질문, 인사이트, 전략, 실행 단계
 - `narrative.js`: 사례 목록·5단계 상세 페이지, 스크롤 목차, 이미지 확대
 - `case-study.css`: 편집 디자인과 PC·모바일 레이아웃
