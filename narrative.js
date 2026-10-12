@@ -12,11 +12,11 @@ const imageFigure = (file,caption) => !file || withheldImages.has(file) || !asse
 
 const grid = document.querySelector('#work-grid');
 if(grid){
-  grid.innerHTML=selectedProjects.map(p=>{const c=caseStories[p.id];return `<article class="case-preview"><div class="preview-heading"><span class="eyebrow">PROJECT ${c.number}</span><span class="small-label">${escapeHTML(p.category)}</span></div><div class="preview-layout"><div class="preview-copy"><p class="project-name">${escapeHTML(p.title)}</p><h3><a href="${projectURL(p)}">${lines(c.headline)}</a></h3><p class="preview-summary">${escapeHTML(c.teaser)}</p><dl class="preview-meta"><div><dt>역할</dt><dd>${escapeHTML(p.role)}</dd></div><div><dt>기간</dt><dd>${periodText(p)}</dd></div></dl><a class="read-link" href="${projectURL(p)}">Case Study 읽기 <span aria-hidden="true">↗</span></a></div><a class="preview-visual" href="${projectURL(p)}" aria-label="${escapeHTML(p.title)} 사례 읽기">${diagram(c.number,true)}</a></div></article>`;}).join('');
+  grid.innerHTML=selectedProjects.map(p=>{const c=caseStories[p.id];return `<article class="case-preview featured-case"><div class="preview-heading"><span class="eyebrow">PROJECT ${c.number}</span><span class="small-label">${escapeHTML(p.category)}</span></div><div class="preview-layout"><div class="preview-copy"><p class="project-name">${escapeHTML(p.title)}</p><h3><a href="${projectURL(p)}">${lines(c.headline)}</a></h3><p class="preview-summary">${escapeHTML(c.teaser)}</p><dl class="preview-meta"><div><dt>역할</dt><dd>${escapeHTML(p.role)}</dd></div><div><dt>기간</dt><dd>${periodText(p)}</dd></div></dl><a class="read-link" href="${projectURL(p)}">Case Study 읽기 <span aria-hidden="true">↗</span></a></div><a class="preview-visual" href="${projectURL(p)}" aria-label="${escapeHTML(p.title)} 사례 읽기">${diagram(c.number,true)}</a></div><div class="featured-outcomes">${metrics(c.results)}</div></article>`;}).join('');
   document.querySelector('#experience-list').innerHTML=experienceStories.map(p=>{const c=caseStories[p.id];return `<article class="experience-preview"><span class="eyebrow">EXPERIENCE ${c.number} / ${escapeHTML(p.organization)}</span><h3><a href="${projectURL(p)}">${lines(c.headline)}</a></h3><p>${escapeHTML(c.teaser)}</p><div class="experience-bottom"><span>${periodText(p)}</span><a class="read-link" href="${projectURL(p)}">문제 해결 과정 읽기 <span aria-hidden="true">↗</span></a></div></article>`;}).join('');
   const workRow = p => `<a class="archive-row" href="${projectURL(p)}"><span class="mono">${caseStories[p.id].number}</span><strong>${escapeHTML(p.title)}</strong><span>${p.scope==='side'?'2주':'Android'}</span><span class="archive-read">읽기 ↗</span></a>`;
   document.querySelector('#development-list').innerHTML=[additionalDevelopment].map(workRow).join('');
-  document.querySelector('#side-project-list').innerHTML=sideProjects.map(workRow).join('');
+  document.querySelector('#side-project-list').innerHTML=sideProjects.map(p=>`<a class="archive-row side-project-row" href="${projectURL(p)}"><span class="mono">${caseStories[p.id].number}</span><span><strong>${escapeHTML(p.title)}</strong><small>${escapeHTML(p.brief.result)}</small></span><span>2주</span><span class="archive-read">요약 ↗</span></a>`).join('');
 }
 
 const content = document.querySelector('#project-content');
@@ -25,6 +25,14 @@ if(content){
   if(!p){
     document.title='사례를 찾을 수 없습니다 — 이범수';
     content.innerHTML='<section class="not-found wrap"><p class="eyebrow">CASE NOT FOUND</p><h1>사례를 찾을 수 없습니다.</h1><a class="read-link" href="index.html#works">대표 사례로 돌아가기 ↗</a></section>';
+  }else if(p.scope==='side'){
+    const c=caseStories[p.id];
+    const brief=p.brief;
+    const next=sideProjects[sideProjects.indexOf(p)+1];
+    document.title=`${p.title} — 프로젝트 요약 ${c.number} — 이범수`;
+    document.querySelector('meta[name="description"]').content=brief.problem;
+    document.body.classList.add('brief-page');
+    content.innerHTML=`<header class="brief-hero wrap"><a class="back-link" href="index.html#other-work">← 그 밖의 작업</a><p class="eyebrow">SIDE PROJECT ${c.number} / iM뱅크 데이터분석 양성과정</p><h1>${escapeHTML(p.title)}</h1><dl class="brief-meta"><div><dt>기간</dt><dd>${periodText(p)}</dd></div><div><dt>역할</dt><dd>${escapeHTML(brief.role)}</dd></div><div><dt>기술</dt><dd>${escapeHTML(p.tags.join(' · '))}</dd></div></dl></header><div class="brief-content wrap"><section aria-labelledby="brief-problem"><h2 id="brief-problem">문제</h2><p>${escapeHTML(brief.problem)}</p></section><section aria-labelledby="brief-approach"><h2 id="brief-approach">접근</h2><p>${escapeHTML(brief.approach)}</p></section><section aria-labelledby="brief-result"><h2 id="brief-result">결과</h2><div><p>${escapeHTML(brief.result)}</p><p class="brief-note">${escapeHTML(brief.note)}</p></div></section></div><footer class="brief-footer wrap"><a class="read-link" href="${projectURL(rmProject)}">대표 프로젝트 01 자세히 보기 <span aria-hidden="true">↗</span></a><nav class="brief-navigation" aria-label="다음 요약 또는 메인 화면으로 이동">${next?`<a href="${projectURL(next)}">다음 요약 ${caseStories[next.id].number} <span aria-hidden="true">→</span></a>`:''}<a href="index.html">메인으로 돌아가기 <span aria-hidden="true">↗</span></a></nav></footer>`;
   }else{
     const c=caseStories[p.id];
     const scope=p.scope==='side'?'SIDE PROJECT':p.scope==='experience'?'EXPERIENCE':'PROJECT';
