@@ -1,6 +1,6 @@
 # 이범수 — AI Engineer
 
-데이터 분석과 개발 경험의 문제 발견, 판단, 실행을 소개하는 Case Study 포트폴리오입니다. 각 상세 페이지는 Problem → Insight → Strategy → Execution → Result 순서로 구성합니다.
+데이터 분석과 개발 경험의 문제 발견, 판단, 실행을 소개하는 프로젝트 포트폴리오입니다. 대표 프로젝트는 RM 대시보드(01)와 음성인식을 통한 스마트 침대 제어(02)입니다. 각 상세 페이지는 Problem → Insight → Strategy → Execution → Result 순서로 구성합니다.
 
 **사이트:** https://lbs3082.github.io/
 

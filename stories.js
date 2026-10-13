@@ -2,7 +2,7 @@
 const experienceStories = [
   {
     "id": "event-safety",
-    "number": "02",
+    "number": "03",
     "scope": "experience",
     "title": "학과 MT 안전 보고 체계 개선",
     "category": "LEADERSHIP / OPERATIONS",
@@ -57,7 +57,7 @@ const experienceStories = [
   },
   {
     "id": "teaching-support",
-    "number": "03",
+    "number": "04",
     "scope": "experience",
     "title": "C프로그래밍 실습의 상시 Q&A 운영",
     "category": "COMMUNICATION / LEARNING SUPPORT",
@@ -113,5 +113,5 @@ const experienceStories = [
 ];
 projects.push(...experienceStories);
 const rmProject=projects.find(p=>p.id==='rm-marketing');
-const selectedProjects=[rmProject];
-const additionalDevelopment=projects.find(p=>p.id==='smart-bed');
+const smartBedProject=projects.find(p=>p.id==='smart-bed');
+const selectedProjects=[rmProject,smartBedProject];

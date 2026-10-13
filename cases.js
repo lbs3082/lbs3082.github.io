@@ -49,7 +49,7 @@ const caseStories = {
     "diagram": "rm"
   },
   "event-safety": {
-    "number": "02",
+    "number": "03",
     "headline": "같은 행사의 사고,\n왜 반복되고 있었을까?",
     "teaser": "500명이 참여한 학과 MT. 경험 있는 선배를 팀에 추가하고 즉시 보고하는 운영 체계를 만들어, 안전사고를 5건에서 3건으로 줄였습니다.",
     "problemTitle": "반복되는 사고와\n늦어지는 현장 판단.",
@@ -88,7 +88,7 @@ const caseStories = {
     "resultNote": "이전 학과 MT의 연간 사고 5건과 이번 행사에서 발생한 3건을 비교했습니다."
   },
   "teaching-support": {
-    "number": "03",
+    "number": "04",
     "headline": "과제를 못 낸 이유는\n어디에서 막혔기 때문일까?",
     "teaser": "C프로그래밍 수강생 30명의 막힌 단계를 짚고, 힌트와 참고 자료를 연결해 과제 제출률을 60%에서 80%로 높였습니다.",
     "problemTitle": "풀이의 막힘이\n제출 지연으로 이어졌습니다.",
@@ -131,7 +131,9 @@ const caseStories = {
     "resultNote": "제출률은 20%p 높아졌습니다. 과제 성공률 80%는 학교의 과제 제출용 code 사이트에 표시된 값입니다."
   },
   "smart-bed": {
-    "number": "04",
+    "number": "02",
+    "takeawayLabel": "WHAT I LEARNED",
+    "teaser": "앱 화면과 음성 API, Bluetooth를 연결해 실제 침대의 부위별 지압 제어를 확인했습니다. 최종 완성에 이르지 못한 과정에서 PM과의 요구사항 소통이 중요함을 배웠습니다.",
     "headline": "음성 명령을\n실제 장치의 동작으로.",
     "problemTitle": "말과 화면의 입력을\n침대까지 전달해야 했습니다.",
     "insightTitle": "입력부터 장치까지\n연결이 필요했습니다.",
