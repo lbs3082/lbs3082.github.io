@@ -52,7 +52,7 @@ const portfolio = {
         ['지역 유형화','PCA와 K-means로 5개 역세권 페르소나를 구성했습니다.'],
         ['수요 추정','Stacking Ensemble로 수요를 예측했습니다.']
       ],visual:'metro'},
-      {id:'result',label:'Result',title:'추정한 수요와\n실제 수요는 다릅니다.',groups:[
+      {id:'result',label:'Result',title:'수요를 추정했고,\n실제 수요 검증은 남았습니다.',groups:[
         {label:'팀의 분석 결과',metrics:[['500m','역세권 결합 기준'],['12','정리한 변수'],['5','역세권 페르소나']],text:'역세권 특성을 유형화하고 신규 노선의 수요를 추정했습니다.'}
       ],image:{file:'metro-analysis.jpg',alt:'팀 프로젝트의 회귀 앙상블 전략 비교 자료',caption:'팀의 모델 비교 자료. 자료의 MAE·R²는 해당 실험의 기록이며 실제 개통 후 수요를 확인한 값이 아닙니다.'},limits:[
         '미개통 노선을 대상으로 한 추정입니다. 실제 개통 후 이용 수요와 비교해 검증한 결과는 없습니다.',
@@ -65,8 +65,8 @@ const portfolio = {
     deck:'30명이 수강한 실습에서 학생이 어디에서 막혔는지 확인하고, 설명·힌트·참고 자료를 연결하는 방식을 바꿨습니다.',
     organization:'국가근로 TA/RA',period:'2025.03 — 12',role:'실습 조교 · 개별 Q&A · 공통 오류 시연 · 제출 확인',tools:['개별 진단','Q&A 운영','실습 지원'],visual:'teaching',outcome:'운영 변경 후 과제 제출률 60% → 80%',
     sections:[
-      {id:'problem',label:'Problem',title:'자세한 설명만으로는\n다음 풀이로 이어지지 않았습니다.',paragraphs:[
-        '처음에는 질문을 받으면 풀이를 자세히 설명해 주는 것이 조교의 역할이라고 생각했습니다. 하지만 학생들은 처음 접하는 개념이나 풀이 단계에서 막혀 과제 제출을 미루고 있었습니다.',
+      {id:'problem',label:'Problem',title:'설명하기 전에,\n막힌 단계부터 확인했습니다.',paragraphs:[
+        '처음에는 질문을 받으면 풀이를 자세히 설명해 주는 것이 조교의 역할이라고 생각했습니다. 하지만 학생들은 처음 접하는 개념이나 풀이 단계에서 막혀 과제 제출이 지연되고 있었습니다.',
         'C프로그래밍 수강생은 30명이었고, 개선 전 과제 제출률은 60%였습니다. 학생들의 수행 방식을 살펴보니 교재와 PPT를 참고하기보다 혼자 풀려고 하면서 핵심 개념을 놓치는 경우가 있었습니다.'
       ]},
       {id:'insight',label:'Insight',title:'같은 막힘도\n필요한 도움은 달랐습니다.',paragraphs:[
@@ -129,7 +129,7 @@ const portfolio = {
     ]
   },
   'customer-transition': {
-    title:'고객 군집 기반 유형 변화 예측',type:'CUSTOMER ANALYTICS',short:'정확도 89%로는\n찾을 수 없는 고객.',headline:'찾아야 할 대상은\n변화하는 고객이었습니다.',
+    title:'고객 군집 기반 유형 변화 예측',type:'CUSTOMER ANALYTICS',short:'정확도만으로는\n알 수 없는 변화.',headline:'찾아야 할 대상은\n변화하는 고객이었습니다.',
     deck:'유지 고객이 많은 데이터에서 변화 여부와 방향을 나눠 예측하고, F1과 재현율로 결과를 살폈습니다.',organization:'iM뱅크 데이터분석 양성과정',period:'2주',role:'팀원 · 모델 성능 향상 · 발표',tools:['LightGBM','Clustering','F1 / Recall'],visual:'transition',outcome:'팀 결과: 1단계 F1 0.692 · 재현율 0.848',
     sections:[
       {id:'problem',label:'Problem',title:'모두 유지로 예측해도\n정확도가 89%였습니다.',paragraphs:['고객의 89%가 유형을 유지하는 불균형 데이터였습니다. 정확도만으로 평가하면 실제로 찾아야 하는 변화 고객을 놓쳐도 높은 점수를 받을 수 있었습니다.']},
