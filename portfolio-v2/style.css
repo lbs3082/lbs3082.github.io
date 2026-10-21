@@ -14,4 +14,5 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 @media print{body{background:white;color:black}.site-header nav,.reading-order,.chapter-nav,.case-pagination,.contact-top .text-link,.skip{display:none}.shell{width:100%}.hero{padding-block:20px}.hero h1{font-size:50px}.work-group,.about{padding-top:30px}.section-head{margin-bottom:25px}.case-layout{display:block}.chapter{break-inside:avoid;padding-block:25px}.work-visual,.limits,.contact{print-color-adjust:exact;-webkit-print-color-adjust:exact}a{color:inherit}.site-header{padding-top:0}.case-hero h1{font-size:45px}.case-pagination{margin-top:0}.other-work{padding-top:35px}}
 .limits p{font-size:14px}.metrics dt{font-size:11px}
+.preview-copy h3 a,.field-preview h3 a{display:block}
 @media(max-width:760px){.limits p{font-size:13px}.outcome-group p{font-size:14px}.metrics dt{font-size:11px}.preview-result p{font-size:13px}}
