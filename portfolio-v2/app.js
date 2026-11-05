@@ -1,13 +1,11 @@
 const html = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const linebreaks = value => html(value).replace(/\n/g,'<br>');
-const requestedMode = new URLSearchParams(location.search).get('view');
-const modeKey = Object.hasOwn(readingModes, requestedMode) ? requestedMode : 'common';
-const mode = readingModes[modeKey];
-const order = [...mode.groups.flatMap(group=>group.ids), ...mode.other];
-const serial = id => String(order.indexOf(id)+1).padStart(2,'0');
-const query = modeKey === 'common' ? '' : `?view=${modeKey}`;
-const homeURL = `./${query}`;
-const caseURL = id => `case.html?id=${encodeURIComponent(id)}${modeKey==='common'?'':`&view=${modeKey}`}`;
+const mainIds = ['rm-marketing'];
+const sideIds = ['graph-anomaly','metro-demand','second-banking'];
+const order = [...mainIds, ...sideIds];
+const serial = id => order.includes(id) ? String(order.indexOf(id)+2).padStart(2,'0') : '';
+const homeURL = './';
+const caseURL = id => `case.html?id=${encodeURIComponent(id)}`;
 const metricList = values => `<dl class="metrics">${values.map(([value,label])=>`<div><dt>${html(label)}</dt><dd>${html(value)}</dd></div>`).join('')}</dl>`;
 
 function visual(kind, compact=false) {
@@ -19,23 +17,25 @@ function visual(kind, compact=false) {
   return '';
 }
 
-const fieldIds=['teaching-support','event-safety'];
-const areaOf=id=>fieldIds.includes(id)?'현장 · 운영':'데이터 분석';
+const tags={'rm-marketing':'LLM · 대시보드','graph-anomaly':'그래프 ML','metro-demand':'ML · 앙상블','second-banking':'데이터 분석'};
 const ownerOf=p=>(p.sections.find(section=>section.ownership)||{}).ownership||'';
-const roleLabels={common:'데이터 분석 · 운영(FDO) 신입 지원',fdo:'운영(FDO) · 데이터 분석 신입 지원',data:'데이터 분석 신입 지원'};
 
 function card(id) {
   const p=portfolio[id];
-  return `<article class="project-card"><div class="card-tags"><span class="mono">${serial(id)}</span><span class="tag${fieldIds.includes(id)?' tag-field':''}">${html(areaOf(id))}</span><span class="card-period">${html(p.period)} · ${html(p.organization)}</span></div><h3><a href="${caseURL(id)}">${html(p.title)}</a></h3><p class="card-deck">${html(p.deck)}</p><dl class="card-meta"><div><dt>내 역할</dt><dd>${html(p.role)}</dd></div><div><dt>도구</dt><dd>${html(p.tools.join(' · '))}</dd></div></dl><div class="card-result"><span>확인한 결과</span><p>${html(p.outcome)}</p></div><a class="card-link" href="${caseURL(id)}">문제와 판단 과정 보기 <span aria-hidden="true">→</span></a></article>`;
+  return `<article class="project-card"><div class="card-tags"><span class="mono">${serial(id)}</span><span class="tag">${html(tags[id]||'AI')}</span><span class="card-period">${html(p.period)} · ${html(p.organization)}</span></div><h3><a href="${caseURL(id)}">${html(p.title)}</a></h3><p class="card-deck">${html(p.deck)}</p><dl class="card-meta"><div><dt>내 역할</dt><dd>${html(p.role)}</dd></div><div><dt>도구</dt><dd>${html(p.tools.join(' · '))}</dd></div></dl><div class="card-result"><span>확인한 결과</span><p>${html(p.outcome)}</p></div><a class="card-link" href="${caseURL(id)}">문제와 판단 과정 보기 <span aria-hidden="true">→</span></a></article>`;
+}
+
+const ragCard=`<article class="project-card"><div class="card-tags"><span class="mono">01</span><span class="tag">RAG · LLM 평가</span><span class="card-period">2026.09.07 — 10.30 · 미래내일 일경험</span></div><h3>아이케미스트 개발 2팀 RAG 평가</h3><p class="card-deck">미래내일 일경험(프로젝트형) 필살기 메이킹 4기에서 팀장으로 PM 소통과 RAG 평가 설계를 맡았습니다.</p><dl class="card-meta"><div><dt>내 역할</dt><dd>팀장 · PM 소통 · RAG 평가 설계</dd></div></dl><div class="card-result"><span>확인한 결과</span><p>근거 검색 Hit@5 92% · 개발용 질문 답변 정답률 약 94%</p></div></article>`;
+
+function sideCard(id) {
+  const p=portfolio[id];
+  return `<li><a class="side-card" href="${caseURL(id)}"><span class="side-top"><span class="mono">${serial(id)}</span><span class="side-badge">${html(p.period)}</span></span><strong>${html(p.title)}</strong><span class="side-role">${html(p.role)}</span><span class="side-result">${html(p.outcome)}</span><span class="side-more">자세히 <span aria-hidden="true">→</span></span></a></li>`;
 }
 
 const grid=document.querySelector('#project-grid');
 if(grid){
-  const role=document.querySelector('#intro-role');
-  if(role)role.textContent=roleLabels[modeKey]||roleLabels.common;
-  document.querySelector('.wordmark').href=homeURL;
-  document.querySelector('#mode-switch').innerHTML=`<span class="mode-label" id="mode-label">직무별 순서</span><nav aria-labelledby="mode-label">${Object.entries(readingModes).map(([key,value])=>`<a href="./${key==='common'?'':`?view=${key}`}#work" ${modeKey===key?'aria-current="page"':''}>${html(key==='common'?'전체':value.name)}</a>`).join('')}</nav>`;
-  grid.innerHTML=order.map(card).join('');
+  grid.innerHTML=ragCard+mainIds.map(card).join('');
+  document.querySelector('#side-list').innerHTML=sideIds.map(sideCard).join('');
 }
 
 const caseContent=document.querySelector('#case-content');
@@ -56,7 +56,7 @@ if(caseContent){
     const scopeNotes=p.scopeNotes||[...new Set(p.sections.flatMap(section=>section.limits||[]))];
     const scopeBlock=scopeNotes.length?`<aside class="limits case-limits" aria-labelledby="scope-title"><h2 id="scope-title">확인한 범위와 한계</h2>${scopeNotes.map(text=>`<p>${html(text)}</p>`).join('')}</aside>`:'';
     const sections=p.sections.map((section,i)=>`<section class="chapter" id="${section.id}" aria-labelledby="title-${section.id}"><div class="chapter-kicker"><span class="mono">${String(i+1).padStart(2,'0')}</span><span>${html(section.label)}</span></div><h2 id="title-${section.id}">${linebreaks(section.title)}</h2>${(!section.groups?(section.paragraphs||[]):[]).map(text=>`<p class="chapter-copy">${html(text)}</p>`).join('')}${section.visual?visual(section.visual):''}${section.steps?`<ol class="steps">${section.steps.map(([title,text],step)=>`<li><span class="mono">${String(step+1).padStart(2,'0')}</span><div><h3>${html(title)}</h3><p>${html(text)}</p></div></li>`).join('')}</ol>`:''}${section.groups?`<div class="outcomes">${section.groups.map(group=>`<section class="outcome-group"><h3>${html(group.label)}</h3><div>${group.metrics?metricList(group.metrics):''}<p>${html(group.text)}</p></div></section>`).join('')}</div>`:''}${section.incidents?`<ol class="incidents" aria-label="운영 후 다시 살핀 세 사례">${section.incidents.map(([title,text],n)=>`<li><span class="mono">0${n+1}</span><div><h3>${html(title)}</h3><p>${html(text)}</p></div></li>`).join('')}</ol>`:''}${(section.groups?(section.paragraphs||[]):[]).map(text=>`<p class="chapter-copy">${html(text)}</p>`).join('')}${section.image?`<figure class="evidence-image"><a href="assets/${section.image.file}" target="_blank" rel="noopener noreferrer" aria-label="${html(section.image.alt)} 원본 보기"><img src="assets/${section.image.file}" alt="${html(section.image.alt)}" width="900" height="507" loading="lazy"></a><figcaption>${html(section.image.caption)}</figcaption></figure>`:''}${section.reflection?`<aside class="reflection"><h3>${html(section.reflection.title)}</h3><p>${html(section.reflection.text)}</p></aside>`:''}</section>`).join('');
-    caseContent.innerHTML=`<header class="case-hero shell"><a class="back-link" href="${homeURL}#work">← 모든 프로젝트</a><div class="case-eyebrow"><span class="eyebrow">CASE ${serial(id)}</span><span class="eyebrow">${html(p.type)}</span></div><p class="case-name">${html(p.title)}</p><h1>${linebreaks(p.headline)}</h1><p class="case-deck">${html(p.deck)}</p><section class="case-summary" aria-labelledby="summary-title"><h2 id="summary-title">30초 요약</h2><dl><div class="summary-result"><dt>확인한 결과</dt><dd>${html(p.outcome)}</dd></div><div class="summary-own"><dt>내가 맡은 일</dt><dd>${html(ownerOf(p))}</dd></div><div><dt>역할</dt><dd>${html(p.role)}</dd></div><div><dt>기간 · 맥락</dt><dd>${html(p.period)} · ${html(p.organization)}</dd></div><div><dt>도구 · 방법</dt><dd>${html(p.tools.join(' · '))}</dd></div></dl></section></header><div class="case-layout shell"><aside class="chapter-nav"><nav aria-label="작업 읽기 목차"><span class="eyebrow">IN THIS STORY</span><ol>${p.sections.map((s,i)=>`<li><a href="#${s.id}" ${i===0?'aria-current="location"':''}><span class="mono">${String(i+1).padStart(2,'0')}</span>${html(s.label)}</a></li>`).join('')}</ol></nav></aside><div class="chapters">${sections}${scopeBlock}</div></div><nav class="case-pagination shell" aria-label="다음 작업 또는 메인으로 이동"><a class="pagination-home" href="${homeURL}#work"><span class="eyebrow">ALL WORK</span><strong>메인으로 돌아가기</strong><span aria-hidden="true">↗</span></a>${next?`<a class="pagination-next" href="${caseURL(next)}"><span class="eyebrow">NEXT / CASE ${serial(next)}</span><strong>${html(portfolio[next].title)}</strong><span aria-hidden="true">→</span></a>`:''}</nav>`;
+    caseContent.innerHTML=`<header class="case-hero shell"><a class="back-link" href="${homeURL}#work">← 모든 프로젝트</a><div class="case-eyebrow"><span class="eyebrow">CASE${serial(id)?' '+serial(id):''}</span><span class="eyebrow">${html(p.type)}</span></div><p class="case-name">${html(p.title)}</p><h1>${linebreaks(p.headline)}</h1><p class="case-deck">${html(p.deck)}</p><section class="case-summary" aria-labelledby="summary-title"><h2 id="summary-title">30초 요약</h2><dl><div class="summary-result"><dt>확인한 결과</dt><dd>${html(p.outcome)}</dd></div><div class="summary-own"><dt>내가 맡은 일</dt><dd>${html(ownerOf(p))}</dd></div><div><dt>역할</dt><dd>${html(p.role)}</dd></div><div><dt>기간 · 맥락</dt><dd>${html(p.period)} · ${html(p.organization)}</dd></div><div><dt>도구 · 방법</dt><dd>${html(p.tools.join(' · '))}</dd></div></dl></section></header><div class="case-layout shell"><aside class="chapter-nav"><nav aria-label="작업 읽기 목차"><span class="eyebrow">IN THIS STORY</span><ol>${p.sections.map((s,i)=>`<li><a href="#${s.id}" ${i===0?'aria-current="location"':''}><span class="mono">${String(i+1).padStart(2,'0')}</span>${html(s.label)}</a></li>`).join('')}</ol></nav></aside><div class="chapters">${sections}${scopeBlock}</div></div><nav class="case-pagination shell" aria-label="다음 작업 또는 메인으로 이동"><a class="pagination-home" href="${homeURL}#work"><span class="eyebrow">ALL WORK</span><strong>메인으로 돌아가기</strong><span aria-hidden="true">↗</span></a>${next?`<a class="pagination-next" href="${caseURL(next)}"><span class="eyebrow">NEXT / CASE ${serial(next)}</span><strong>${html(portfolio[next].title)}</strong><span aria-hidden="true">→</span></a>`:''}</nav>`;
     if('IntersectionObserver' in window){
       const links=[...document.querySelectorAll('.chapter-nav a')];
       const observer=new IntersectionObserver(entries=>{entries.filter(entry=>entry.isIntersecting).forEach(entry=>{links.forEach(link=>{if(link.hash===`#${entry.target.id}`)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});});},{rootMargin:'-15% 0px -65% 0px'});

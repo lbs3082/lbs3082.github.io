@@ -115,3 +115,22 @@ a.btn:focus-visible{outline-offset:3px}
 @media(max-width:860px){.intro{grid-template-columns:1fr;padding-block:40px 48px;gap:32px}.key-results{grid-template-columns:1fr;gap:18px}.case-summary dl{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){.site-header{flex-wrap:wrap;gap:8px 16px;padding-block:10px}.site-header nav{order:3;width:100%;margin-left:-14px;font-size:14px;gap:0}.site-header nav a{padding:10px 12px}.header-cta{margin-left:auto}.intro-line br{display:none}.facts{padding:20px}.facts dl>div{grid-template-columns:64px 1fr;font-size:14px}.work,.skills,.history{padding-block:48px}.project-card{padding:20px}.project-card h3{font-size:20px}.mode-switch{width:100%}.mode-switch nav{width:100%}.mode-switch a{flex:1;justify-content:center;padding:0 8px;font-size:14px}.timeline li{grid-template-columns:1fr;gap:2px}.timeline p{grid-column:auto}.contact{padding-block:48px}.contact-actions{width:100%}.contact-actions .btn{flex:1 1 100%}.case-summary{padding:20px;margin-top:32px}.case-summary dl{grid-template-columns:1fr}.case-summary .summary-result dd{font-size:18px}}
 @media print{.header-cta,.mode-switch,.contact-actions .btn-ghost{display:none}}
+
+/* main vs side projects */
+.work-sub{font-size:15px;font-weight:650;color:var(--muted);margin-bottom:14px}
+.project-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))}
+.side-work{margin-top:48px;padding-top:28px;border-top:1px dashed var(--line)}
+.side-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:14px}
+.side-head h3{font-size:15px;font-weight:650;color:var(--muted)}
+.side-head p{font-size:14px;color:var(--muted)}
+.side-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px}
+.side-card{display:flex;flex-direction:column;gap:6px;height:100%;padding:16px 18px;background:var(--soft);border-radius:10px;font-size:14px;line-height:1.55}
+.side-card:hover{color:inherit;background:#e2e0d6}
+.side-card:hover strong{color:var(--blue)}
+.side-top{display:flex;align-items:center;gap:8px}
+.side-top .mono{font-size:12px;color:var(--muted)}
+.side-badge{font-size:12px;font-weight:600;padding:1px 8px;border-radius:999px;border:1px solid #b9b9ad;color:var(--muted)}
+.side-card strong{font-size:16px;font-weight:650;letter-spacing:-.02em}
+.side-role{color:var(--muted);font-size:13px}
+.side-result{font-size:13px;color:#3c3f39}
+.side-more{margin-top:auto;padding-top:4px;font-size:13px;font-weight:650;color:var(--blue)}
