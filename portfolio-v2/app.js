@@ -1,7 +1,7 @@
 const html = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const linebreaks = value => html(value).replace(/\n/g,'<br>');
 const mainIds = ['rm-marketing'];
-const sideIds = ['graph-anomaly','metro-demand','second-banking'];
+const sideIds = ['graph-anomaly','metro-demand','second-banking','event-safety'];
 const order = [...mainIds, ...sideIds];
 const serial = id => order.includes(id) ? String(order.indexOf(id)+2).padStart(2,'0') : '';
 const homeURL = './';
@@ -25,7 +25,7 @@ function card(id) {
   return `<article class="project-card"><div class="card-tags"><span class="mono">${serial(id)}</span><span class="tag">${html(tags[id]||'AI')}</span><span class="card-period">${html(p.period)} · ${html(p.organization)}</span></div><h3><a href="${caseURL(id)}">${html(p.title)}</a></h3><p class="card-deck">${html(p.deck)}</p><dl class="card-meta"><div><dt>내 역할</dt><dd>${html(p.role)}</dd></div><div><dt>도구</dt><dd>${html(p.tools.join(' · '))}</dd></div></dl><div class="card-result"><span>확인한 결과</span><p>${html(p.outcome)}</p></div><a class="card-link" href="${caseURL(id)}">문제와 판단 과정 보기 <span aria-hidden="true">→</span></a></article>`;
 }
 
-const ragCard=`<article class="project-card"><div class="card-tags"><span class="mono">01</span><span class="tag">RAG · LLM 평가</span><span class="card-period">2026.09.07 — 10.30 · 미래내일 일경험</span></div><h3>아이케미스트 개발 2팀 RAG 평가</h3><p class="card-deck">미래내일 일경험(프로젝트형) 필살기 메이킹 4기에서 팀장으로 PM 소통과 RAG 평가 설계를 맡았습니다.</p><dl class="card-meta"><div><dt>내 역할</dt><dd>팀장 · PM 소통 · RAG 평가 설계</dd></div></dl><div class="card-result"><span>확인한 결과</span><p>근거 검색 Hit@5 92% · 개발용 질문 답변 정답률 약 94%</p></div></article>`;
+const ragCard=`<article class="project-card"><div class="card-tags"><span class="mono">01</span><span class="tag">RAG · LLM 평가</span><span class="card-period">2026.09.07 — 10.30 · 미래내일 일경험</span></div><h3>아이케미스트 개발 2팀 RAG 평가</h3><p class="card-deck">미래내일 일경험(프로젝트형) 필살기 메이킹 4기에서 팀장으로 PM 소통과 RAG 평가 설계를 맡았습니다.</p><dl class="card-meta"><div><dt>내 역할</dt><dd>팀장 · PM 소통 · RAG 평가 설계</dd></div></dl><div class="card-result"><span>확인한 결과</span><p>Hit@5 지표로 평가 → 개발용 질문 답변 정답률 약 94%</p></div></article>`;
 
 function sideCard(id) {
   const p=portfolio[id];

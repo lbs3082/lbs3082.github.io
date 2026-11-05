@@ -134,3 +134,4 @@ a.btn:focus-visible{outline-offset:3px}
 .side-role{color:var(--muted);font-size:13px}
 .side-result{font-size:13px;color:#3c3f39}
 .side-more{margin-top:auto;padding-top:4px;font-size:13px;font-weight:650;color:var(--blue)}
+.key-results{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
