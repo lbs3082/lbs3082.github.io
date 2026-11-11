@@ -1,0 +1,13 @@
+:root {
+  --font-sans: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", Arial, sans-serif;
+  --background: transparent;
+  --chart-1: #183fb8;
+  --chart-2: #9fb0e6;
+  --chart-background: #ffffff;
+  --chart-foreground: #20241f;
+  --chart-foreground-muted: #5a5d55;
+  --chart-label: #5a5d55;
+  --chart-grid: #e3e2d9;
+}
+html, body { background: transparent; margin: 0; overflow: hidden; }
+body { font-family: var(--font-sans); word-break: keep-all; }

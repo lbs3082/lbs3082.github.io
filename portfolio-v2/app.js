@@ -64,3 +64,11 @@ if(caseContent){
     }
   }
 }
+
+const dashFrame=document.querySelector('.dash-frame');
+if(dashFrame){
+  window.addEventListener('message',event=>{
+    if(event.origin!==location.origin||event.source!==dashFrame.contentWindow) return;
+    if(event.data&&event.data.type==='dash-height'&&Number.isFinite(event.data.height)) dashFrame.style.height=`${Math.ceil(event.data.height)}px`;
+  });
+}
