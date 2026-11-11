@@ -78,7 +78,7 @@ export default function App() {
 
         <Card
           kicker="아이케미스트 일경험 · RAG 평가"
-          title="개발용 질문 답변 정답률"
+          title="최종용 질문 답변 정답률"
           note="문서 1,000개 기준, Hit Rate(Hit@5) 지표로 평가. 약 94%로 목표 80%를 넘었습니다."
         >
           <div className="relative mx-auto aspect-square w-full max-w-[260px]">
